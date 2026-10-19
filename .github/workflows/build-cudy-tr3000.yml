@@ -43,8 +43,6 @@ jobs:
   check:
     name: build openwrt cudy tr3000
     runs-on: ubuntu-latest
-    outputs:
-      should_build: ${{ steps.check.outputs.should_build }}
     steps:
     - name: Checkout
       uses: actions/checkout@v5
@@ -94,7 +92,7 @@ jobs:
         args: zip -qq -r openwrt-tr3000.zip openwrt-${{ env.OPENWRT_VERSION }}/bin
 
     - name: Release and Upload
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
