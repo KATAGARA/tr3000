@@ -26,17 +26,6 @@ concurrency:
 
 env:
   OPENWRT_VERSION: "25.12.6"
-  REPO_URL: https://github.com/ImmortalWrt/ImmortalWrt
-  QMODEM_URL: https://github.com/FUjr/QModem.git
-  CONFIG_FILE: cudy-tr3000-extra.config
-  DIY_P2_SH: cudy-tr3000-diy-part2.sh
-  LAST_REF_FILE: cudy-tr3000.last-built-ref
-  REQUIRED_PKGS: cudy-tr3000-required-packages.txt
-  # 产物层校验目标: 一次构建只出一个 profile, 必须确认产物真的就是它
-  # (曾因 make defconfig 收敛到 ubootmod, 产物里根本没有原厂分区的镜像)
-  DEFAULT_PROFILE: cudy_tr3000-v1
-  UPLOAD_BIN_DIR: false
-  UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
 
 jobs:
