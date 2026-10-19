@@ -64,8 +64,8 @@ jobs:
         
     - name: Copy files
       run: |
+        cp .config feeds.conf.default openwrt-${{ env.OPENWRT_VERSION }}/
         cd openwrt-${{ env.OPENWRT_VERSION }}
-        cp .config feeds.conf.default ./
         rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
       
     - name: Update the feeds
