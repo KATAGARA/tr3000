@@ -84,8 +84,8 @@ jobs:
       uses: softprops/action-gh-release@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      tag_name: "25.12.6"
       with:
+        name: v${{ env.OPENWRT_VERSION }}
         files: openwrt-tr3000.zip
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
