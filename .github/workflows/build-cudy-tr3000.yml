@@ -80,12 +80,19 @@ jobs:
       with:
         args: zip -qq -r openwrt-tr3000.zip openwrt-${{ env.OPENWRT_VERSION }}/bin
 
+
+- name: Create tag
+        id: create_tag
+        run: |
+          tag_name="v${{ env.OPENWRT_VERSION }}"
+          git tag $tag_name
+          git push origin $tag_name
+
     - name: Release and Upload
       uses: softprops/action-gh-release@v3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: v${{ env.OPENWRT_VERSION }}
         files: openwrt-tr3000.zip
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
