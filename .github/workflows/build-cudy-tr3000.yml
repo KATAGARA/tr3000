@@ -87,7 +87,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: CudyTR3000_OpenWRT_v${{ env.OPENWRT_VERSION }}
+        tag_name: CudyTR3000_OpenWRT_v${{ env.OPENWRT_VERSION }}_${{ github.event.repository.pushed_at }}
         files: openwrt-tr3000.zip
 
     - name: Delete workflow runs
