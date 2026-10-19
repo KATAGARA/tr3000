@@ -81,12 +81,12 @@ jobs:
         args: zip -qq -r openwrt-tr3000.zip openwrt-${{ env.OPENWRT_VERSION }}/bin
 
 
-- name: Create tag
-        id: create_tag
-        run: |
-          tag_name="v${{ env.OPENWRT_VERSION }}"
-          git tag $tag_name
-          git push origin $tag_name
+    - name: Create tag
+      id: create_tag
+      run: |
+        tag_name="v${{ env.OPENWRT_VERSION }}"
+        git tag $tag_name
+        git push origin $tag_name
 
     - name: Release and Upload
       uses: softprops/action-gh-release@v3
