@@ -32,8 +32,6 @@ jobs:
   check:
     name: build openwrt cudy tr3000
     runs-on: ubuntu-latest
-    outputs:
-      should_build: ${{ steps.check.outputs.should_build }}
     steps:
     - name: Checkout
       uses: actions/checkout@v5
@@ -76,11 +74,16 @@ jobs:
       run: |
         cd openwrt-${{ env.OPENWRT_VERSION }}
         make -j8
-    
-    - name: zip the bin
-      uses: montudor/action-zip@v1
-      with:
-        args: zip -qq -r openwrt-tr3000.zip openwrt-${{ env.OPENWRT_VERSION }}/bin
+        
+    - name: Zip Firmware
+      run: |
+        cd openwrt-${{ env.OPENWRT_VERSION }}/bin/targets/mediatek/filogic
+        zip -qq $GITHUB_WORKSPACE/openwrt-tr3000.zip openwrt*
+    # - name: zip the bin
+    #   uses: montudor/action-zip@v1
+    #   with:
+    #     args: zip -qq -r openwrt-tr3000.zip openwrt-${{ env.OPENWRT_VERSION }}/bin
+        #args: cd openwrt-${{ env.OPENWRT_VERSION }}/bin/targets/mediatek/filogic && zip -qq -r ../../openwrt-tr3000.zip *
 
     - name: Release and Upload
       uses: softprops/action-gh-release@v3
@@ -89,7 +92,7 @@ jobs:
       with:
         #tag_name: CudyTR3000_OpenWRT_v${{ env.OPENWRT_VERSION }}_${{ github.event.repository.pushed_at }}
         tag_name: v${{ env.OPENWRT_VERSION }}
-        files: openwrt-tr3000.zip
+        files: openwrt-tr3000.zip openwrt-${{ env.OPENWRT_VERSION }}/bin/targets/mediatek/filogic/openwrt*
 
     - name: Delete workflow runs
       uses: Mattraks/delete-workflow-runs@main
